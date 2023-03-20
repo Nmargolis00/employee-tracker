@@ -18,8 +18,9 @@ async function startProgram() {
 
 if (selections.selectionChosen === "View all departments"){
     try {
-        console.table([])
-        //db.query?
+        db.query('SELECT', function (err, results) {
+            console.log(results);
+        })
     } catch (error) {
        console.log(error); 
     }

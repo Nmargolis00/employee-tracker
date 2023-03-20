@@ -20,8 +20,9 @@ const db = mysql.createConnection(
     // MySQL username,
     user: 'root',
     // TODO: Add MySQL password here
-    password: 'process.env.MYSQL_PW',
-    database: 'workplace_db'
+    password: 'Margoli$1',
+    database: 'workplace_db',
+    port: ""
   },
   console.log(`Connected to the workplace_db database.`)
 );
@@ -29,63 +30,102 @@ const db = mysql.createConnection(
 //Initial Prompts
 
 async function startProgram() {
-    const {selectionChosen} = await inquirer.prompt([
+   inquirer.prompt([
         {type: 'list',
          name: 'selectionChosen',
          message: 'Please select from the following options',
-         choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role", "Update employee managers", "View employees by manager", "View employees by department", "Delete an employee", "delete a department", "delete a role", "View total utilized budget of a department", "Exit Program"],
+         choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role", "Update employee managers", "View employees by manager", "View employees by department", "Delete an employee", "Delete a department", "Delete a role", "View total utilized budget of a department", "Exit Program"],
         },
-    ]);
-    await createTable(selectionChosen);
+    ])
+    .then((userChoice) => {
+        let choice = userChoice.selectionChosen
+        switch (choice) {
+            case "View all departments":
+                viewDepartments();
+                break;
+            case "View all Roles":
+                viewRoles();
+                break;
+            case "View all employees":
+                viewEmployees();
+                break;
+            case "Add a department":
+                addDept();
+                break;
+            case "Add a role":
+                addRole();
+                break;
+            case "Add an employee":
+                addEmployee();
+                break;
+            case "Update an employee role":
+                updateEmployee();
+                break;
+            case "Update employee managers":
+                updateManager();
+                break;
+            case "View employees by manager":
+                managerEmployees();
+                break;
+            case "Delete an employee":
+                deleteEmployee();
+                break;
+            case "Delete a department":
+                deleteDept();
+                break;
+            case "Delete a role":
+                deleteRole();
+                break;
+            case "View the total utilized budget of a department":
+                deptBudget();
+                break;
+            case "Exit Program":
+                process.exitProgram();
+        };
+    })
+    
 };
 
-async function createTable(selectionChosen) {
-    const programAction = new ProgramAction(db, inquirer);
-    switch (selectionChosen) {
-        case "View all departments":
-            programAction.viewDepartments();
-            break;
-        case "View all Roles":
-            await programAction.viewRoles();
-            break;
-        case "View all employees":
-            await programAction.viewEmployees();
-            break;
-        case "Add a department":
-            await programAction.addDept();
-            break;
-        case "Add a role":
-            await programAction.addRole();
-            break;
-        case "Add an employee":
-            await programAction.addEmployee();
-            break;
-        case "Update an employee role":
-            await programAction.updateEmployee();
-            break;
-        case "Update employee managers":
-            await programAction.updateManager();
-            break;
-        case "View employees by manager":
-            await programAction.managerEmployees();
-            break;
-        case "Delete an employee":
-            await programAction.deleteEmployee();
-            break;
-        case "Delete a department":
-            await programAction.deleteDept();
-            break;
-        case "Delete a role":
-            await programAction.deleteRole();
-            break;
-        case "View the total utilized budget of a department":
-            await programAction.deptBudget();
-            break;
-        case "Exit Program":
-            process.exitProgram();
-    };
-    await startProgram();
-};
+// Functions to View Department
+function viewDepartments() {
+    db.query(`SELECT * FROM department`, function (err, res) {
+       (err) ? console.log(err) : console.table(res), startProgram(); 
+    });
+}
+
+//Function to View Roles
+function viewRoles() {
+    db.query(`SELECT role.title, role.id, role.salary, department.department_name FROM role JOIN department ON role.department_id = department.id`, function (err, res) {
+       (err) ? console.log(err) : console.table(res), startProgram(); 
+    });
+}
+
+//Function to View Employees
+function viewEmployees() {
+    db.query(`SELECT employee.id, employee.first_name, employee.last_name FROM employee JOIN role ON role.id = employee.role.id`, function (err, res) {
+       (err) ? console.log(err) : console.table(res), startProgram(); 
+    });
+}
+
+// Function to add department
+function addDept() {
+    inquirer.prompt([{
+        type: 'input',
+        name: 'newDept',
+        message: "Please enter the new department"
+    }])
+    .then((response) => {
+        console.log("Department Added!"  + response.newDept);
+        let deptName = response.newDept;
+        db.query(`INSERT INTO department (name) VALUES ("${deptName}")`, function (err, res) {
+            (err) ? console.log(err) : console.table(`Added ${deptName}`, res), viewDepartments(); 
+            startProgram();
+        })
+    });   
+}
+
+
+startProgram();
 
 //Successful Connection
 app.listen(PORT, () => {

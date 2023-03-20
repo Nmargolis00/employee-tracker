@@ -1,16 +1,18 @@
 const queries = {
-    viewDepartments: 'SELECT * FROM department',
+    viewDepartments: `SELECT * FROM department`,
 
-    viewRoles: 'ADD CODE',
+    viewRoles: `SELECT role.title, role.id, role.salary, department.department_name FROM role JOIN department ON role.department_id = department.id`,
 
-    viewEmployees: 'ADD CODE',
+    //This one needs help
+    viewEmployees: `SELECT employee.id, employee.first_name, employee.last_name FROM employee JOIN role ON role.id = employee.role.id`,
 
-    addDept: 'ADD CODE',
+    addDept: (deptName) => `INSERT INTO department (department_name) VALUES ("${deptName}")`,
 
-    addRole: 'ADD CODE',
+    addRole: (title, salary, department_id) => `INSERT INTO role (title, salary, department_id) VALUES ("${title}, ${salary}, ${department_id})`,
 
-    addEmployee: 'ADD CODE',
+    addEmployee: (first_name, last_name, role_id, manager_id) => `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("${first_name}, ${last_name}, ${role_id}, ${manager_id}")`,
 
+    //Will have prompt with list of employees to select
     updateEmployee: 'ADD CODE',
 
     updateManager: 'ADD CODE',

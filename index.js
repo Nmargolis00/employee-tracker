@@ -2,6 +2,8 @@ const inquirer = require('inquirer');
 const table = require('console.table');
 const mysql2 = require('mysql2');
 
+
+
 //Initial Prompts
 
 async function startProgram() {
@@ -11,5 +13,15 @@ async function startProgram() {
          message: 'Please select from the following options',
          choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role", "Exit Program"],
         },
-    ])
+    ]);
+};
+
+if (selections.selectionChosen === "View all departments"){
+    try {
+        console.table([])
+        //db.query?
+    } catch (error) {
+       console.log(error); 
+    }
+    startProgram();
 }

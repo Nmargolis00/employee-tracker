@@ -124,6 +124,34 @@ function addDept() {
     });   
 }
 
+// Function to add department
+function addRole() {
+    inquirer.prompt([{
+        type: 'input',
+        name: 'newRole',
+        message: "Please enter the new department"
+    },
+    {
+        type: 'input',
+        name: 'salary',
+        message: 'Please enter the new role salary'
+    },
+    {
+        type: 'input',
+        name: 'DeptID',
+        message: 'Please enter the department ID'
+    }
+])
+    .then((response) => {
+        console.log("New Role Added!"  + response.newDept);
+        let newRole = response.newRole;
+        db.query(`INSERT INTO role (title) VALUES ("${newRole}")`, function (err, res) {
+            (err) ? console.log(err) : console.table(`Added ${deptName}`, res), viewRoles(); 
+            startProgram();
+        })
+    });   
+}
+
 
 startProgram();
 

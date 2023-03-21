@@ -5,6 +5,7 @@ const inquirer = require('inquirer');
 const table = require('console.table');
 const queries = require('./db/queries');
 require('dotenv').config();
+const util = require('util');
 
 
 const PORT = process.env.PORT || 3001;
@@ -26,6 +27,8 @@ const db = mysql.createConnection(
   },
   console.log(`Connected to the workplace_db database.`)
 );
+
+db.query = util.promisify(db.query)
 
 //Initial Prompts
 
@@ -95,7 +98,7 @@ function viewDepartments() {
 
 //Function to View Roles
 function viewRoles() {
-    db.query(`SELECT role.id, role.title, role.salary, department.department_name FROM role JOIN department ON role.department_id = department.id`, function (err, res) {
+    db.query(`SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department on role.department_id = department.id`, function (err, res) {
        (err) ? console.log(err) : console.table(res), startProgram(); 
     });
 }

@@ -95,7 +95,7 @@ function viewDepartments() {
 
 //Function to View Roles
 function viewRoles() {
-    db.query(`SELECT role.title, role.id, role.salary, department.department_name FROM role JOIN department ON role.department_id = department.id`, function (err, res) {
+    db.query(`SELECT role.id, role.title, role.salary, department.department_name FROM role JOIN department ON role.department_id = department.id`, function (err, res) {
        (err) ? console.log(err) : console.table(res), startProgram(); 
     });
 }
@@ -124,7 +124,7 @@ function addDept() {
     });   
 }
 
-// Function to add department
+// Function to add role
 function addRole() {
     inquirer.prompt([{
         type: 'input',
@@ -143,10 +143,10 @@ function addRole() {
     }
 ])
     .then((response) => {
-        console.log("New Role Added!"  + response.newDept);
+        console.log("New Role Added!"  + response.newRole);
         let newRole = response.newRole;
         db.query(`INSERT INTO role (title) VALUES ("${newRole}")`, function (err, res) {
-            (err) ? console.log(err) : console.table(`Added ${deptName}`, res), viewRoles(); 
+            (err) ? console.log(err) : console.table(`Added ${newRole}`, res), viewRoles(); 
             startProgram();
         })
     });   

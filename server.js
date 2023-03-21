@@ -4,6 +4,7 @@ const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const table = require('console.table');
 const queries = require('./db/queries');
+require('dotenv').config();
 
 
 const PORT = process.env.PORT || 3001;

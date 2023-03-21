@@ -6,35 +6,40 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+
 ## Description
 
-This application allows non-developers to easily view and interact with information stored in a database to manage and track their employees. This application runs from the terminal and helps the user manage a company's employee database using Node.js, Inquirer, Express.js, MySQL2, and sequelize. It allows the user to manage the departments, roles, and employees in their company.
+This project helped me to think through how to approach a problem and build it out with JavaScript, mysql and sequelize. I was able to familiarize myself with myself concepts to modify table data. I was able to store and modify the data in the database. This was helpful to understand mysql commands
 
-## Table of Contents
+## Table of Contents (Optional)
 
-1. [License](#license)
-2. [Installation](#installation)
-3. [Usage](#usage)
-4. [Tests](#tests)
-5. [Contributing](#contributing)
-6. [Questions](#questions)
+N/A
 
-## Installation
 
-npm i
+## Demo
 
-## Usage
 
-This project will be used to easily manage employees at a company
+
+## Credits
+
+N/A
+
+## License
+
+MIT License
+
+## Badges
+
+N/A
+
+## Features
+
+Saves notes on a database for future use and edits!
+
+## How to Contribute
+
+N/A
 
 ## Tests
 
-npm run test
-
-## Contributing
-
-## Questions
-
-Questions?
-
-
+N/A

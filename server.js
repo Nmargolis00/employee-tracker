@@ -20,7 +20,7 @@ const db = mysql.createConnection(
     // MySQL username,
     user: 'root',
     // TODO: Add MySQL password here
-    password: 'Margoli$1',
+    password: 'process.env.MYSQL_PW',
     database: 'workplace_db',
     port: ""
   },

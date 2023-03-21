@@ -21,9 +21,8 @@ const db = mysql.createConnection(
     // MySQL username,
     user: 'root',
     // TODO: Add MySQL password here
-    password: 'process.env.MYSQL_PW',
+    password: process.env.MYSQL_PW,
     database: 'workplace_db',
-    port: ""
   },
   console.log(`Connected to the workplace_db database.`)
 );

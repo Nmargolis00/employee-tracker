@@ -18,7 +18,7 @@ N/A
 
 ## Demo
 
-
+https://watch.screencastify.com/v/LjeI9HN9wrSjSd4Ic1TU
 
 ## Credits
 
@@ -34,7 +34,7 @@ N/A
 
 ## Features
 
-Saves notes on a database for future use and edits!
+Backend employee tracker
 
 ## How to Contribute
 

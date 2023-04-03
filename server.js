@@ -1,9 +1,5 @@
 const express = require("express");
 const sequelize = require("./config/connection");
-//import models to sync table with database
-const Department = require("./models/Department");
-const Role = require("./models/Role");
-const Employee = require("./models/Employee");
 const startProgram = require("./index.js");
 const routes = require("./routes");
 

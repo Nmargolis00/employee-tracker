@@ -11,6 +11,12 @@ const sequelize = new Sequelize(
     dialect: "mysql",
     port: 3306,
   }
+
+  sequelize.connect(function (err){
+    if(err) {
+      throw err;
+    }
+  })
 );
 
-module.exports = sequelize;
+module.exports = connection;

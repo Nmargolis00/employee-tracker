@@ -1,11 +1,8 @@
 const inquirer = require("inquirer");
 const sequelize = require("./config/connection");
 const table = require("console.table");
+const query = require('./db/queries');
 
-const Department = require("./models/Department");
-const Employee = require("./models/Employee");
-const Role = require("./models/Role");
-const { afterUpdate } = require("./models/Department");
 
 // sequelize.query(`SET FOREIGN_KEY_CHECKS = 0`);
 async function startProgram() {
